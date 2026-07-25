@@ -45,9 +45,28 @@
             <input type="tel" id="telefono" name="telefono" required maxlength="30" placeholder="11 2345 6789">
           </div>
           <div class="field">
-            <label for="zona">Barrio / Zona</label>
-            <input type="text" id="zona" name="zona" required maxlength="120">
+            <label for="localidad">Localidad</label>
+            <select id="localidad" name="localidad" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option value="Córdoba Capital">Córdoba Capital</option>
+              <option value="Villa Carlos Paz">Villa Carlos Paz</option>
+              <option value="Río Cuarto">Río Cuarto</option>
+              <option value="Alta Gracia">Alta Gracia</option>
+              <option value="Jesús María">Jesús María</option>
+              <option value="Villa María">Villa María</option>
+              <option value="otra">Otra</option>
+            </select>
           </div>
+        </div>
+
+        <div class="field" id="localidad-otra-wrap" style="display:none">
+          <label for="localidadOtra">Especificá la localidad</label>
+          <input type="text" id="localidadOtra" name="localidadOtra" maxlength="120">
+        </div>
+
+        <div class="field">
+          <label for="zona">Barrio / Zona</label>
+          <input type="text" id="zona" name="zona" required maxlength="120">
         </div>
 
         <div class="field">

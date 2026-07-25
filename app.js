@@ -86,16 +86,32 @@ async function sendToSheet(payload) {
 /* ---------------- Formulario de SOLICITUD (paciente) ---------------- */
 const formSolicitud = document.getElementById("form-solicitud");
 if (formSolicitud) {
+  const localidadSelect = formSolicitud.localidad;
+  const localidadOtraWrap = document.getElementById("localidad-otra-wrap");
+  if (localidadSelect && localidadOtraWrap) {
+    localidadSelect.addEventListener("change", () => {
+      const esOtra = localidadSelect.value === "otra";
+      localidadOtraWrap.style.display = esOtra ? "" : "none";
+      formSolicitud.localidadOtra.required = esOtra;
+    });
+  }
+
   formSolicitud.addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = document.getElementById("btn-submit");
     setLoading(btn, true, "Enviando...", "Enviar solicitud");
+
+    const localidad =
+      formSolicitud.localidad.value === "otra"
+        ? formSolicitud.localidadOtra.value.trim()
+        : formSolicitud.localidad.value;
 
     const payload = {
       formType: "solicitud",
       necesidad: formSolicitud.necesidad.value.trim(),
       nombrePaciente: formSolicitud.nombrePaciente.value.trim(),
       telefono: formSolicitud.telefono.value.trim(),
+      localidad: localidad,
       zona: formSolicitud.zona.value.trim(),
       direccion: formSolicitud.direccion.value.trim(),
       duracion: formSolicitud.duracion.value,
@@ -136,6 +152,10 @@ if (formRegistro) {
       formRegistro.querySelectorAll('input[name="prestaciones"]:checked')
     ).map((cb) => cb.value);
 
+    const localidades = Array.from(
+      formRegistro.querySelectorAll('input[name="localidades"]:checked')
+    ).map((cb) => cb.value);
+
     const payload = {
       formType: "profesional",
       nombre: formRegistro.nombre.value.trim(),
@@ -144,6 +164,7 @@ if (formRegistro) {
       matricula: formRegistro.matricula.value.trim(),
       profesion: formRegistro.profesion.value,
       zona: formRegistro.zona.value.trim(),
+      localidades: localidades.join(", "),
       prestaciones: prestaciones.join(", "),
       movilidad: formRegistro.movilidad.value,
       experiencia: formRegistro.experiencia.value.trim(),
