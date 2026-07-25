@@ -7,5 +7,5 @@ export const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9qSEhu
 // Número de WhatsApp al que se envía la confirmación de cada solicitud.
 // Formato internacional, solo dígitos, SIN "+" ni espacios (ej: Argentina
 // celular Buenos Aires: 5491122334455 -> 54 9 11 2233 4455).
-// Por ahora es el número de Javi; luego se reemplaza por el número operativo.
-export const WHATSAPP_NUMBER = "REEMPLAZAR_NUMERO_WHATSAPP";
+// Por ahora es el número de Javi (test); luego se reemplaza por el número operativo.
+export const WHATSAPP_NUMBER = "5493516839895";

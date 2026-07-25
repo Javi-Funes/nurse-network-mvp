@@ -2,28 +2,42 @@ import { APPS_SCRIPT_URL, WHATSAPP_NUMBER } from "./config.js";
 
 const DEMO_MODE = APPS_SCRIPT_URL.startsWith("REEMPLAZAR");
 
-function buildWhatsappMessage(payload) {
-  const lines = [
-    "Nueva solicitud - Nurse Network",
-    "",
-    `Necesidad: ${payload.necesidad}`,
-    `Paciente: ${payload.nombrePaciente}`,
-    `Teléfono: ${payload.telefono}`,
-    `Zona: ${payload.zona}`,
-    `Dirección: ${payload.direccion}`,
-    `Duración: ${payload.duracion}`,
-    `Horario preferido: ${payload.horario}`,
-    `Urgencia: ${payload.urgencia}`,
-    `Prestación: ${payload.prestacion || "A evaluar por el operador"}`,
-  ];
-  if (payload.indicaciones) {
-    lines.push(`Indicaciones: ${payload.indicaciones}`);
-  }
-  return lines.join("\n");
+function formatFechaHora(d) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-function buildWhatsappLink(payload) {
-  const texto = buildWhatsappMessage(payload);
+const URGENCIA_LABEL = {
+  urgente: "🔴 Es urgente",
+  hoy: "🟠 La necesita hoy",
+  programada: "🟢 Programada",
+};
+
+function buildWhatsappMessage(payload, folio) {
+  const lines = [
+    "🆕 *NUEVA SOLICITUD – NURSE NETWORK*",
+    folio ? `🆔 *Pedido:* ${folio}` : null,
+    `📅 *Recibido:* ${formatFechaHora(new Date())}`,
+    "",
+    `🙋 *Paciente:* ${payload.nombrePaciente}`,
+    `📞 *Teléfono:* ${payload.telefono}`,
+    `📍 *Zona:* ${payload.zona}`,
+    `🏠 *Dirección:* ${payload.direccion}`,
+    "",
+    `📝 *Necesidad:* ${payload.necesidad}`,
+    `⏳ *Duración:* ${payload.duracion}`,
+    `🕒 *Horario:* ${payload.horario}`,
+    `🚨 *Urgencia:* ${URGENCIA_LABEL[payload.urgencia] || payload.urgencia}`,
+    `💉 *Prestación:* ${payload.prestacion || "A evaluar por el operador"}`,
+  ];
+  if (payload.indicaciones) {
+    lines.push(`🗒️ *Indicaciones:* ${payload.indicaciones}`);
+  }
+  return lines.filter((l) => l !== null).join("\n");
+}
+
+function buildWhatsappLink(payload, folio) {
+  const texto = buildWhatsappMessage(payload, folio);
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
 }
 
@@ -93,10 +107,10 @@ if (formSolicitud) {
     };
 
     try {
-      await sendToSheet(payload);
+      const resultado = await sendToSheet(payload);
       const waBtn = document.getElementById("btn-whatsapp");
       if (waBtn) {
-        waBtn.href = buildWhatsappLink(payload);
+        waBtn.href = buildWhatsappLink(payload, resultado && resultado.folio);
         waBtn.style.display = "inline-flex";
       }
       formSolicitud.reset();
