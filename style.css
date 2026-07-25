@@ -144,6 +144,14 @@ button.btn-submit:hover:not(:disabled){box-shadow:0 6px 18px rgba(63,167,150,.4)
 .msg.ok{background:#e7f6ee;color:var(--ok);border:1px solid #bfe6cf}
 .msg.error{background:#fbeceb;color:var(--error);border:1px solid #f1c7c3}
 
+.msg.ok .msg-note{margin-top:2px;margin-bottom:14px;font-weight:700}
+.btn-whatsapp{
+  display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;
+  padding:13px 22px;border-radius:999px;font-weight:800;font-size:15px;
+  text-decoration:none;border:none;cursor:pointer;
+}
+.btn-whatsapp:hover{box-shadow:0 6px 18px rgba(37,211,102,.45)}
+
 .back-link{display:inline-block;margin-bottom:18px;color:var(--mid);text-decoration:none;font-size:14px}
 .back-link:hover{text-decoration:underline}
 

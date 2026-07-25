@@ -1,6 +1,31 @@
-import { APPS_SCRIPT_URL } from "./config.js";
+import { APPS_SCRIPT_URL, WHATSAPP_NUMBER } from "./config.js";
 
 const DEMO_MODE = APPS_SCRIPT_URL.startsWith("REEMPLAZAR");
+
+function buildWhatsappMessage(payload) {
+  const lines = [
+    "Nueva solicitud - Nurse Network",
+    "",
+    `Necesidad: ${payload.necesidad}`,
+    `Paciente: ${payload.nombrePaciente}`,
+    `Teléfono: ${payload.telefono}`,
+    `Zona: ${payload.zona}`,
+    `Dirección: ${payload.direccion}`,
+    `Duración: ${payload.duracion}`,
+    `Horario preferido: ${payload.horario}`,
+    `Urgencia: ${payload.urgencia}`,
+    `Prestación: ${payload.prestacion || "A evaluar por el operador"}`,
+  ];
+  if (payload.indicaciones) {
+    lines.push(`Indicaciones: ${payload.indicaciones}`);
+  }
+  return lines.join("\n");
+}
+
+function buildWhatsappLink(payload) {
+  const texto = buildWhatsappMessage(payload);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
+}
 
 function showMsg(form, type) {
   const ok = form.querySelector("#msg-ok");
@@ -69,6 +94,11 @@ if (formSolicitud) {
 
     try {
       await sendToSheet(payload);
+      const waBtn = document.getElementById("btn-whatsapp");
+      if (waBtn) {
+        waBtn.href = buildWhatsappLink(payload);
+        waBtn.style.display = "inline-flex";
+      }
       formSolicitud.reset();
       showMsg(formSolicitud, "ok");
     } catch (err) {
