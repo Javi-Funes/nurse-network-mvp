@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitar un enfermero — Nurse Network</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="container">
+    <div class="brand">
+      <span class="name">Nurse Network</span>
+      <span class="by">by Emergencia AG</span>
+    </div>
+    <nav class="site">
+      <a href="index.html">Inicio</a>
+      <a href="registro.html">Soy profesional</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-shell">
+  <div class="container form-wrap">
+    <a class="back-link" href="index.html">&larr; Volver al inicio</a>
+    <div class="form-card">
+      <h1>Solicitar un enfermero</h1>
+      <p class="intro">Contanos qué necesitás. Un operador de Nurse Network revisa tu pedido y te confirma un profesional por teléfono o WhatsApp.</p>
+
+      <form id="form-solicitud">
+        <div class="field">
+          <label for="nombrePaciente">Nombre del paciente</label>
+          <input type="text" id="nombrePaciente" name="nombrePaciente" required maxlength="120">
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="telefono">Teléfono de contacto</label>
+            <input type="tel" id="telefono" name="telefono" required maxlength="30" placeholder="11 2345 6789">
+          </div>
+          <div class="field">
+            <label for="zona">Barrio / Zona</label>
+            <input type="text" id="zona" name="zona" required maxlength="120">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" required maxlength="200">
+        </div>
+
+        <div class="field">
+          <label for="prestacion">¿Qué necesitás?</label>
+          <select id="prestacion" name="prestacion" required>
+            <option value="" disabled selected>Elegí la prestación</option>
+            <option>Aplicación de medicación (inyectable / EV / IM)</option>
+            <option>Curación de heridas</option>
+            <option>Colocación de sonda (vesical / nasogástrica)</option>
+            <option>Control de signos vitales</option>
+            <option>Cuidados post-operatorios</option>
+            <option>Cuidado de paciente crónico / acompañamiento</option>
+            <option>Extracción de sangre</option>
+            <option>Vacunación</option>
+            <option>Otro (especificar en indicaciones)</option>
+          </select>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="horario">Horario preferido</label>
+            <input type="text" id="horario" name="horario" required maxlength="120" placeholder="Hoy 17:00, o lo antes posible">
+          </div>
+          <div class="field">
+            <label for="urgencia">Urgencia</label>
+            <select id="urgencia" name="urgencia" required>
+              <option value="programada">Programada (puedo esperar)</option>
+              <option value="hoy">La necesito hoy</option>
+              <option value="urgente">Es urgente</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="indicaciones">Indicaciones médicas / detalles <span class="hint">Opcional, pero ayuda a encontrar el profesional correcto más rápido.</span></label>
+          <textarea id="indicaciones" name="indicaciones" maxlength="600"></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn-submit" id="btn-submit">Enviar solicitud</button>
+        </div>
+
+        <div class="msg ok" id="msg-ok">
+          ¡Listo! Recibimos tu solicitud. Un operador de Nurse Network te va a contactar por teléfono o WhatsApp para confirmar el profesional y el horario.
+        </div>
+        <div class="msg error" id="msg-error">
+          Hubo un problema al enviar tu solicitud. Probá de nuevo en unos segundos.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="container">
+    <span>Nurse Network by Emergencia AG — proyecto en validación</span>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

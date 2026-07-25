@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de profesionales — Nurse Network</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="container">
+    <div class="brand">
+      <span class="name">Nurse Network</span>
+      <span class="by">by Emergencia AG</span>
+    </div>
+    <nav class="site">
+      <a href="index.html">Inicio</a>
+      <a href="solicitar.html">Solicitar enfermero</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-shell">
+  <div class="container form-wrap">
+    <a class="back-link" href="index.html">&larr; Volver al inicio</a>
+    <div class="form-card">
+      <h1>Registrate como profesional</h1>
+      <p class="intro">Registro gratuito. Nuestro equipo audita tu matrícula y documentación antes de activarte en la red. En esta primera etapa trabajamos con enfermeros/as matriculados/as.</p>
+
+      <form id="form-registro">
+        <div class="row-2">
+          <div class="field">
+            <label for="nombre">Nombre y apellido</label>
+            <input type="text" id="nombre" name="nombre" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="telefono">Teléfono / WhatsApp</label>
+            <input type="tel" id="telefono" name="telefono" required maxlength="30" placeholder="11 2345 6789">
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required maxlength="150">
+          </div>
+          <div class="field">
+            <label for="matricula">N° de matrícula</label>
+            <input type="text" id="matricula" name="matricula" required maxlength="60">
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="profesion">Profesión</label>
+            <select id="profesion" name="profesion" required>
+              <option value="Enfermero/a" selected>Enfermero/a</option>
+              <option value="Kinesiólogo/a" disabled>Kinesiólogo/a (próximamente)</option>
+              <option value="Técnico en extracción" disabled>Técnico en extracción (próximamente)</option>
+              <option value="Vacunador/a" disabled>Vacunador/a (próximamente)</option>
+              <option value="Cuidador/a" disabled>Cuidador/a (próximamente)</option>
+              <option value="Otro" disabled>Otro (próximamente)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="zona">Zona / barrios donde trabajás</label>
+            <input type="text" id="zona" name="zona" required maxlength="200" placeholder="Ej: Centro, Norte, hasta 5km">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Prestaciones que realizás <span class="hint">Marcá todas las que apliquen.</span></label>
+          <div class="checkbox-grid">
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Aplicación de medicación (inyectable / EV / IM)">Aplicación de medicación (inyectable / EV / IM)</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Curación de heridas">Curación de heridas</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Colocación de sonda (vesical / nasogástrica)">Colocación de sonda (vesical / nasogástrica)</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Control de signos vitales">Control de signos vitales</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Cuidados post-operatorios">Cuidados post-operatorios</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Cuidado de paciente crónico / acompañamiento">Cuidado de paciente crónico / acompañamiento</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Extracción de sangre">Extracción de sangre</label>
+            <label class="checkbox-item"><input type="checkbox" name="prestaciones" value="Vacunación">Vacunación</label>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="movilidad">Movilidad</label>
+            <select id="movilidad" name="movilidad" required>
+              <option value="Propia (auto/moto)">Propia (auto/moto)</option>
+              <option value="Transporte público">Transporte público</option>
+              <option value="A pie / zona acotada">A pie / zona acotada</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="experiencia">Años de experiencia</label>
+            <input type="text" id="experiencia" name="experiencia" required maxlength="30">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="disponibilidad">Disponibilidad horaria</label>
+          <textarea id="disponibilidad" name="disponibilidad" required maxlength="400" placeholder="Ej: lunes a viernes 8 a 18hs, guardias de fin de semana"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="documentacion">Documentación (matrícula, DNI, título) <span class="hint">Opcional acá — también podés enviarla por WhatsApp una vez que te contactemos. Máx. 10MB por archivo, PDF o foto.</span></label>
+          <input type="file" id="documentacion" name="documentacion" accept="application/pdf,image/*" multiple>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn-submit" id="btn-submit">Enviar registro</button>
+        </div>
+
+        <div class="msg ok" id="msg-ok">
+          ¡Gracias por sumarte! Recibimos tu registro. Nuestro equipo va a auditar tu matrícula y documentación, y te contactamos por WhatsApp para activarte en la red.
+        </div>
+        <div class="msg error" id="msg-error">
+          Hubo un problema al enviar tu registro. Probá de nuevo en unos segundos.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="container">
+    <span>Nurse Network by Emergencia AG — proyecto en validación</span>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
