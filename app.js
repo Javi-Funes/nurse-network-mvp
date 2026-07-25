@@ -16,7 +16,7 @@ const URGENCIA_LABEL = {
 function buildWhatsappMessage(payload, folio) {
   const lines = [
     "🆕 *NUEVA SOLICITUD – NURSE NETWORK*",
-    folio ? `🆔 *Pedido:* ${folio}` : null,
+    folio ? `📋 *Pedido:* ${folio}` : null,
     `📅 *Recibido:* ${formatFechaHora(new Date())}`,
     "",
     `🙋 *Paciente:* ${payload.nombrePaciente}`,
@@ -26,7 +26,7 @@ function buildWhatsappMessage(payload, folio) {
     "",
     `📝 *Necesidad:* ${payload.necesidad}`,
     `⏳ *Duración:* ${payload.duracion}`,
-    `🕒 *Horario:* ${payload.horario}`,
+    `⏱️ *Horario:* ${payload.horario}`,
     `🚨 *Urgencia:* ${URGENCIA_LABEL[payload.urgencia] || payload.urgencia}`,
     `💉 *Prestación:* ${payload.prestacion || "A evaluar por el operador"}`,
   ];
