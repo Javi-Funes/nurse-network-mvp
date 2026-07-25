@@ -143,6 +143,14 @@ if (formSolicitud) {
 /* ---------------- Formulario de REGISTRO (profesional) ---------------- */
 const formRegistro = document.getElementById("form-registro");
 if (formRegistro) {
+  const localidadOtraCheck = document.getElementById("localidad-otra-check");
+  const localidadOtraWrapProf = document.getElementById("localidad-otra-wrap-prof");
+  if (localidadOtraCheck && localidadOtraWrapProf) {
+    localidadOtraCheck.addEventListener("change", () => {
+      localidadOtraWrapProf.style.display = localidadOtraCheck.checked ? "" : "none";
+    });
+  }
+
   formRegistro.addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = document.getElementById("btn-submit");
@@ -154,7 +162,15 @@ if (formRegistro) {
 
     const localidades = Array.from(
       formRegistro.querySelectorAll('input[name="localidades"]:checked')
-    ).map((cb) => cb.value);
+    )
+      .map((cb) => {
+        if (cb.value === "otra") {
+          const libre = formRegistro.localidadOtraProf.value.trim();
+          return libre ? `Otra: ${libre}` : null;
+        }
+        return cb.value;
+      })
+      .filter(Boolean);
 
     const payload = {
       formType: "profesional",
