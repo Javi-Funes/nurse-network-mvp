@@ -54,13 +54,15 @@ if (formSolicitud) {
 
     const payload = {
       formType: "solicitud",
+      necesidad: formSolicitud.necesidad.value.trim(),
       nombrePaciente: formSolicitud.nombrePaciente.value.trim(),
       telefono: formSolicitud.telefono.value.trim(),
       zona: formSolicitud.zona.value.trim(),
       direccion: formSolicitud.direccion.value.trim(),
-      prestacion: formSolicitud.prestacion.value,
+      duracion: formSolicitud.duracion.value,
       horario: formSolicitud.horario.value.trim(),
       urgencia: formSolicitud.urgencia.value,
+      prestacion: formSolicitud.prestacion.value,
       indicaciones: formSolicitud.indicaciones.value.trim(),
       estado: "Nueva",
     };

@@ -25,10 +25,15 @@
   <div class="container form-wrap">
     <a class="back-link" href="index.html">&larr; Volver al inicio</a>
     <div class="form-card">
-      <h1>Solicitar un enfermero</h1>
-      <p class="intro">Contanos qué necesitás. Un operador de Nurse Network revisa tu pedido y te confirma un profesional por teléfono o WhatsApp.</p>
+      <h1>Contanos qué necesitás</h1>
+      <p class="intro">No hace falta que sepas el nombre técnico de nada. Describí la situación y un operador de Nurse Network se encarga de encontrar al profesional adecuado.</p>
 
       <form id="form-solicitud">
+        <div class="field">
+          <label for="necesidad">¿En qué podemos ayudarte?</label>
+          <textarea id="necesidad" name="necesidad" required maxlength="800" rows="4" placeholder="Ej: necesito que le hagan una curación a mi papá / que cuiden a mi mamá el fin de semana / que le pongan suero durante toda la semana / control postquirúrgico todo el mes"></textarea>
+        </div>
+
         <div class="field">
           <label for="nombrePaciente">Nombre del paciente</label>
           <input type="text" id="nombrePaciente" name="nombrePaciente" required maxlength="120">
@@ -50,26 +55,16 @@
           <input type="text" id="direccion" name="direccion" required maxlength="200">
         </div>
 
-        <div class="field">
-          <label for="prestacion">¿Qué necesitás?</label>
-          <select id="prestacion" name="prestacion" required>
-            <option value="" disabled selected>Elegí la prestación</option>
-            <option>Aplicación de medicación (inyectable / EV / IM)</option>
-            <option>Curación de heridas</option>
-            <option>Colocación de sonda (vesical / nasogástrica)</option>
-            <option>Control de signos vitales</option>
-            <option>Cuidados post-operatorios</option>
-            <option>Cuidado de paciente crónico / acompañamiento</option>
-            <option>Extracción de sangre</option>
-            <option>Vacunación</option>
-            <option>Otro (especificar en indicaciones)</option>
-          </select>
-        </div>
-
         <div class="row-2">
           <div class="field">
-            <label for="horario">Horario preferido</label>
-            <input type="text" id="horario" name="horario" required maxlength="120" placeholder="Hoy 17:00, o lo antes posible">
+            <label for="duracion">¿Cómo es el servicio que necesitás?</label>
+            <select id="duracion" name="duracion" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option value="Una sola vez">Una sola vez</option>
+              <option value="Varios días seguidos">Varios días seguidos</option>
+              <option value="Todas las semanas (días fijos)">Todas las semanas (días fijos)</option>
+              <option value="Todo el mes o de forma continua">Todo el mes o de forma continua</option>
+            </select>
           </div>
           <div class="field">
             <label for="urgencia">Urgencia</label>
@@ -82,7 +77,28 @@
         </div>
 
         <div class="field">
-          <label for="indicaciones">Indicaciones médicas / detalles <span class="hint">Opcional, pero ayuda a encontrar el profesional correcto más rápido.</span></label>
+          <label for="horario">Días y horario preferido</label>
+          <input type="text" id="horario" name="horario" required maxlength="150" placeholder="Ej: hoy a las 17hs, lunes a viernes por la mañana, fines de semana...">
+        </div>
+
+        <div class="field">
+          <label for="prestacion">¿Ya sabés qué prestación específica necesitás? <span class="hint">Opcional — si no estás seguro, con lo que contaste arriba alcanza.</span></label>
+          <select id="prestacion" name="prestacion">
+            <option value="" selected>Prefiero que lo evalúen ustedes</option>
+            <option>Aplicación de medicación (inyectable / EV / IM)</option>
+            <option>Curación de heridas</option>
+            <option>Colocación de sonda (vesical / nasogástrica)</option>
+            <option>Control de signos vitales</option>
+            <option>Cuidados post-operatorios</option>
+            <option>Cuidado de paciente crónico / acompañamiento</option>
+            <option>Extracción de sangre</option>
+            <option>Vacunación</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="indicaciones">Indicaciones médicas / detalles adicionales <span class="hint">Opcional, pero ayuda a encontrar el profesional correcto más rápido.</span></label>
           <textarea id="indicaciones" name="indicaciones" maxlength="600"></textarea>
         </div>
 
