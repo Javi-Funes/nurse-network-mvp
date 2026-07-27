@@ -108,6 +108,7 @@ if (formSolicitud) {
 
     const payload = {
       formType: "solicitud",
+      empresa: formSolicitud.empresa ? formSolicitud.empresa.value.trim() : "",
       necesidad: formSolicitud.necesidad.value.trim(),
       nombrePaciente: formSolicitud.nombrePaciente.value.trim(),
       telefono: formSolicitud.telefono.value.trim(),
@@ -174,6 +175,7 @@ if (formRegistro) {
 
     const payload = {
       formType: "profesional",
+      empresa: formRegistro.empresa ? formRegistro.empresa.value.trim() : "",
       nombre: formRegistro.nombre.value.trim(),
       telefono: formRegistro.telefono.value.trim(),
       email: formRegistro.email.value.trim(),
@@ -192,9 +194,13 @@ if (formRegistro) {
     try {
       const files = formRegistro.documentacion.files;
       if (files && files.length && !DEMO_MODE) {
+        const tiposPermitidos = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
         for (const file of files) {
           if (file.size > 8 * 1024 * 1024) {
             throw new Error(`El archivo ${file.name} pesa más de 8MB.`);
+          }
+          if (file.type && tiposPermitidos.indexOf(file.type) === -1) {
+            throw new Error(`El archivo ${file.name} debe ser PDF o una foto (JPG, PNG, WEBP).`);
           }
           payload.archivos.push({
             fileName: file.name,

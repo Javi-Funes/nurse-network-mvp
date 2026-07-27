@@ -29,6 +29,11 @@
       <p class="intro">Registro gratuito. Nuestro equipo audita tu matrícula y documentación antes de activarte en la red. En esta primera etapa trabajamos con enfermeros/as matriculados/as.</p>
 
       <form id="form-registro">
+        <div style="position:absolute;left:-5000px" aria-hidden="true">
+          <label for="empresa">No completar este campo</label>
+          <input type="text" id="empresa" name="empresa" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="row-2">
           <div class="field">
             <label for="nombre">Nombre y apellido</label>
@@ -122,7 +127,7 @@
         </div>
 
         <div class="field">
-          <label for="documentacion">Documentación (matrícula, DNI, título) <span class="hint">Opcional acá — también podés enviarla por WhatsApp una vez que te contactemos. Máx. 10MB por archivo, PDF o foto.</span></label>
+          <label for="documentacion">Documentación (matrícula, DNI, título) <span class="hint">Opcional acá — también podés enviarla por WhatsApp una vez que te contactemos. Máx. 8MB por archivo, PDF o foto.</span></label>
           <input type="file" id="documentacion" name="documentacion" accept="application/pdf,image/*" multiple>
         </div>
 
