@@ -7,37 +7,20 @@ function formatFechaHora(d) {
   return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-const URGENCIA_LABEL = {
-  urgente: "🔴 Es urgente",
-  hoy: "🟠 La necesita hoy",
-  programada: "🟢 Programada",
-};
-
-function buildWhatsappMessage(payload, folio) {
+function buildWhatsappMessage(folio) {
   const lines = [
     "🆕 *NUEVA SOLICITUD – NURSE NETWORK*",
-    folio ? `📋 *Pedido:* ${folio}` : null,
+    folio ? `📋 *Folio:* ${folio}` : null,
     `📅 *Recibido:* ${formatFechaHora(new Date())}`,
     "",
-    `🙋 *Paciente:* ${payload.nombrePaciente}`,
-    `📞 *Teléfono:* ${payload.telefono}`,
-    `📍 *Zona:* ${payload.zona}`,
-    `🏠 *Dirección:* ${payload.direccion}`,
-    "",
-    `📝 *Necesidad:* ${payload.necesidad}`,
-    `⏳ *Duración:* ${payload.duracion}`,
-    `⏱️ *Horario:* ${payload.horario}`,
-    `🚨 *Urgencia:* ${URGENCIA_LABEL[payload.urgencia] || payload.urgencia}`,
-    `💉 *Prestación:* ${payload.prestacion || "A evaluar por el operador"}`,
+    "Un paciente completó el formulario de solicitud.",
+    "👉 Entrá a la planilla para ver el detalle y coordinar.",
   ];
-  if (payload.indicaciones) {
-    lines.push(`🗒️ *Indicaciones:* ${payload.indicaciones}`);
-  }
   return lines.filter((l) => l !== null).join("\n");
 }
 
-function buildWhatsappLink(payload, folio) {
-  const texto = buildWhatsappMessage(payload, folio);
+function buildWhatsappLink(folio) {
+  const texto = buildWhatsappMessage(folio);
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
 }
 
@@ -127,7 +110,7 @@ if (formSolicitud) {
       const resultado = await sendToSheet(payload);
       const waBtn = document.getElementById("btn-whatsapp");
       if (waBtn) {
-        waBtn.href = buildWhatsappLink(payload, resultado && resultado.folio);
+        waBtn.href = buildWhatsappLink(resultado && resultado.folio);
         waBtn.style.display = "inline-flex";
       }
       formSolicitud.reset();
